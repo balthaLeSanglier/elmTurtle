@@ -50,9 +50,19 @@ repeatParser =
         |= lazy (\_ -> instructionParser)
         |. symbol "]"
 
--- Parse une liste d'instructions
+-- Parse une instruction
 instructionParser : Parser Instruction
 instructionParser =
     oneOf [ forwardParser, leftParser, rightParser, repeatParser ]
 
+instructionListParser : Parser (List Instruction)
+instructionListParser =
+    Parser.sequence {
+        start = "["
+        , separator = ","
+        , end = "]"
+        , spaces = spaces
+        , item = instructionParser
+        , trailing = Optional
+    }
 
