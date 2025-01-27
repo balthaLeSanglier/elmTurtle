@@ -19,7 +19,7 @@ initialModel : Model
 initialModel =
     { userInput = "",
       svgOutput = svg
-        [ width "200", height "200", viewBox "0 0 200 200" ]
+        [ width "500", height "500", viewBox "0 0 500 500" ]
         [ Svg.line [ x1 "0", y1 "0", x2 "0", y2 "0", stroke "black", strokeWidth "2" ] []
         ]}
 
@@ -43,19 +43,24 @@ update msg model =
 -- Vue
 view : Model -> Html Msg
 view model =
-    div []
-        [ input
-            [ placeholder "Entrez du texte ici"
-            , value model.userInput
-            , onInput UpdateInput
+    div [ class "container" ]
+        [ div [ class "card" ]
+            [ div [ class "title" ] [Html.text "TcTurtle Interpreter"  ]
+            , input
+                [ placeholder "Enter instructions (e.g., [Forward 100, Left 90])"
+                , value model.userInput
+                , onInput UpdateInput
+                , class "input"
+                ]
+                []
+            , button
+                [ onClick Submit
+                , class "button"
+                ]
+                [ Html.text "Generate SVG" ]
             ]
-            []
-        , button
-            [ onClick Submit ]
-            [ ]
-        , div []
-            [ ] 
-        , model.svgOutput
+        , div [ class "svg-container" ]
+            [model.svgOutput]
         ]
 
 -- Programme principal
