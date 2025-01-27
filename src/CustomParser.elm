@@ -4,12 +4,16 @@ import Parser exposing (..)
 
 -- Définition des instructions TcTurtle
 type Instruction
-    = Repeat Int (Instruction)
-    | Forward Int
-    | Left Int
-    | Right Int 
+    = Repeat Int (List Instruction)
+    | Forward Float
+    | Left Float
+    | Right Float 
 
--- Parse un entier
+-- Parse un float
+floatParser : Parser Float
+floatParser =
+    Parser.float
+
 intParser : Parser Int
 intParser =
     Parser.int
@@ -20,7 +24,7 @@ forwardParser =
     succeed Forward
         |. symbol "Forward"
         |. spaces
-        |= intParser
+        |= floatParser
 
 -- Parse une instruction "Left"
 leftParser : Parser Instruction
@@ -28,7 +32,7 @@ leftParser =
     succeed Left
         |. symbol "Left"
         |. spaces
-        |= intParser
+        |= floatParser
 
 -- Parse une instruction "Right"
 rightParser : Parser Instruction
@@ -36,7 +40,7 @@ rightParser =
     succeed Right
         |. symbol "Right"
         |. spaces
-        |= intParser
+        |= floatParser
 
 -- Parse une instruction "Repeat"
 repeatParser : Parser Instruction
@@ -46,9 +50,7 @@ repeatParser =
         |. spaces
         |= intParser
         |. spaces
-        |. symbol "["
-        |= lazy (\_ -> instructionParser)
-        |. symbol "]"
+        |= lazy (\_ -> instructionListParser)
 
 -- Parse une instruction
 instructionParser : Parser Instruction
