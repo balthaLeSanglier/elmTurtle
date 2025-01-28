@@ -6313,16 +6313,16 @@ var $author$project$SvgDrawer$treatForward = F2(
 			});
 	});
 var $author$project$SvgDrawer$treatLeft = F2(
-	function (angle, state) {
+	function (newangle, state) {
 		return _Utils_update(
 			state,
-			{angle: angle});
+			{angle: newangle + state.angle});
 	});
 var $author$project$SvgDrawer$treatRight = F2(
-	function (angle, state) {
+	function (newangle, state) {
 		return _Utils_update(
 			state,
-			{angle: -angle});
+			{angle: (-newangle) + state.angle});
 	});
 var $author$project$SvgDrawer$convertInstructionToLine = F2(
 	function (instruction, state) {

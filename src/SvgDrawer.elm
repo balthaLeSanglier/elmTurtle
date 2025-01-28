@@ -95,12 +95,12 @@ treatForward distance state =
     }
 
 treatLeft: Float -> State -> State
-treatLeft angle state =
-    {state | angle = angle}
+treatLeft newangle state =
+    {state | angle = newangle + state.angle}
 
 treatRight: Float -> State -> State
-treatRight angle state =
-    {state | angle = -angle}
+treatRight newangle state =
+    {state | angle = -newangle + state.angle}
 
 treatRepeat : Int -> List Instruction -> State -> State
 treatRepeat count instructions state =
