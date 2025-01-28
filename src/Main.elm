@@ -8,7 +8,7 @@ import Html.Attributes exposing (placeholder, value)
 import Html.Events exposing (onInput, onClick)
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
-
+ 
 
 -- Modèle
 type alias Model =
