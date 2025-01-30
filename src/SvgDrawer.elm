@@ -94,13 +94,13 @@ treatForward distance state =
         , lines = ((x, y), (x2, y2)) :: state.lines
     }
 
-treatLeft: Float -> State -> State
-treatLeft newangle state =
-    {state | angle = newangle + state.angle}
+treatLeft : Float -> State -> State
+treatLeft angle state =
+    { state | angle = state.angle - angle }  
 
-treatRight: Float -> State -> State
-treatRight newangle state =
-    {state | angle = -newangle + state.angle}
+treatRight : Float -> State -> State
+treatRight angle state =
+    { state | angle = state.angle + angle }  
 
 treatRepeat : Int -> List Instruction -> State -> State
 treatRepeat count instructions state =
